@@ -39,6 +39,17 @@ class Comment
      */
     private $post;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Post::class, inversedBy="comments")
+     */
+    private $no;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Post::class, inversedBy="comment")
+     */
+    private $ok;
+
+    
     public function getId(): ?int
     {
         return $this->id;
@@ -88,6 +99,30 @@ class Comment
     public function setPost(?Post $post): self
     {
         $this->post = $post;
+
+        return $this;
+    }
+
+    public function getNo(): ?Post
+    {
+        return $this->no;
+    }
+
+    public function setNo(?Post $no): self
+    {
+        $this->no = $no;
+
+        return $this;
+    }
+
+    public function getOk(): ?Post
+    {
+        return $this->ok;
+    }
+
+    public function setOk(?Post $ok): self
+    {
+        $this->ok = $ok;
 
         return $this;
     }

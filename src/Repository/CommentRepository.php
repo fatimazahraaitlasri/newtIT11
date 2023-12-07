@@ -20,6 +20,24 @@ class CommentRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Comment::class);
     }
+   
+    /**
+     * Récupère tous les commentaires liés à un post par son ID
+     *
+     * @param int $postId
+     * @return Comment[]
+     */
+    public function findCommentsByPostId(int $postId): array
+    {
+        return $this->createQueryBuilder('c')
+            ->andWhere('c.post = :postId')
+            ->setParameter('postId', $postId)
+            ->orderBy('c.createdAt', 'DESC') // Vous pouvez trier selon vos besoins
+            ->getQuery()
+            ->getResult();
+    }
+
+
 
     public function add(Comment $entity, bool $flush = false): void
     {
@@ -38,6 +56,8 @@ class CommentRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
+
+
 
 //    /**
 //     * @return Comment[] Returns an array of Comment objects

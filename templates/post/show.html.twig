@@ -19,7 +19,10 @@
                 <th>Content</th>
                 <td>{{ post.content }}</td>
             </tr>
+           
+          
         </tbody>
+        
     </table>
 
     <a href="{{ path('app_comment_new', {'postId': post.id}) }}">Add comment</a>
@@ -27,6 +30,20 @@
                     
 
     <a href="{{ path('app_post_index') }}">back to list</a>
+    
+      {% for comment in comments  %}
+        <div>
+
+            {{comment.user.email}} à dit : 
+            
+        </div>
+        <div>
+
+            {{comment.content}}
+            
+        </div>
+       
+        {% endfor %}
 
 
 {% endblock %}
