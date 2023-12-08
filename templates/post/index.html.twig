@@ -5,40 +5,27 @@
 {% block head %}
     {{ parent() }}
     <!-- Ajoutez le CDN de Tailwind CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 {% endblock %}
 
 {% block body %}
-    <h1 class="text-2xl font-bold mb-4 bg-black">Posts</h1>
+    <h1 class="text-3xl  font-bold underline mb-6">Posts</h1>
 
     {% for post in posts %}
-        <div class="mb-6 p-4 border rounded shadow-lg">
-            <h2 class="text-xl font-semibold mb-2">Titre :</h2>
+        <div class="mb-6 p-4 border rounded shadow-lg text-center">
+            <h2 class="text-xl font-semibold mb-2">Titre: </h2>
             <div class="mb-3">{{ post.title }}</div>
 
-            <h2 class="text-xl font-semibold mb-2">Content :</h2>
+            <h2 class="text-xl font-semibold mb-2">Content: </h2>
             <div>{{ post.content }}</div>
 
-            <table class="table w-full mt-6">
-                <thead>
-                    <tr>
-                        <th class="border p-2">Title</th>
-                        <th class="border p-2">Content</th>
-                        <th class="border p-2"></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td class="border p-2">{{ post.title }}</td>
-                        <td class="border p-2">{{ post.content }}</td>
-                        <td class="border p-2">
-                            <a href="{{ path('app_post_show', {'id': post.id}) }}" class="text-blue-500 hover:underline">Show</a>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+            <div class="mt-6">
+                <a href="{{ path('app_post_show', {'id': post.id}) }}" class="text-blue-500 hover:underline">Show</a>
+           
+
+            </div>
         </div>
     {% else %}
         <p class="text-gray-600">No records found</p>
     {% endfor %}
+    
 {% endblock %}

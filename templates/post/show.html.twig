@@ -3,47 +3,28 @@
 {% block title %}Post{% endblock %}
 
 {% block body %}
-    <h1>Post</h1>
+    <div class="mb-6 p-4 border rounded shadow-lg text-center">
+        <h1 class="text-3xl font-bold mb-4">Post</h1>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ post.id }}</td>
-            </tr>
-            <tr>
-                <th>Title</th>
-                <td>{{ post.title }}</td>
-            </tr>
-            <tr>
-                <th>Content</th>
-                <td>{{ post.content }}</td>
-            </tr>
-           
-          
-        </tbody>
-        
-    </table>
-
-    <a href="{{ path('app_comment_new', {'postId': post.id}) }}">Add comment</a>
-
-                    
-
-    <a href="{{ path('app_post_index') }}">back to list</a>
-    
-      {% for comment in comments  %}
-        <div>
-
-            {{comment.user.email}} à dit : 
-            
-        </div>
-        <div>
-
-            {{comment.content}}
-            
-        </div>
        
-        {% endfor %}
+        <div class="mb-4">
+            <span class="font-semibold">Title:</span>
+            <span>{{ post.title }}</span>
+        </div>
+        <div class="mb-4">
+            <span class="font-semibold">Content:</span>
+            <span>{{ post.content }}</span>
+        </div>
 
+        <a href="{{ path('app_comment_new', {'postId': post.id}) }}" class="text-blue-500 hover:underline">Add comment</a>
+        
+        <a href="{{ path('app_post_index') }}" class="block mt-4 text-sm text-gray-600 hover:underline">Back to list</a>
+    </div>
 
+    {% for comment in comments  %}
+        <div class="mt-6">
+            <p class="font-semibold">{{ comment.user.email }} a dit :</p>
+            <p>{{ comment.content }}</p>
+        </div>
+    {% endfor %}
 {% endblock %}
