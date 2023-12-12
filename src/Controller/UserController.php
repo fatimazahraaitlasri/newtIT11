@@ -1,15 +1,18 @@
 <?php
 
 namespace App\Controller;
-
+use Symfony\Component\Security\Core\User\UserInterface;
 use App\Entity\User;
 use App\Form\UserType;
 use App\Repository\UserRepository;
+use Doctrine\ORM\Mapping\Id;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use  Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+
 
 /**
  * @Route("/user")
@@ -94,4 +97,30 @@ class UserController extends AbstractController
 
         return $this->redirectToRoute('app_user_index', [], Response::HTTP_SEE_OTHER);
     }
+
+
+
+/**
+ * @Route("/profile", name="app_user_profile", methods={"GET"})
+ * @ParamConverter("user", class="App\Entity\User")
+ */
+public function profile(): Response
+{
+    // Utilisez getUser() pour obtenir l'utilisateur connecté
+    /** @var UserInterface $user */
+    $user = $this->getUser();
+
+    // Vérifiez si un utilisateur est connecté
+    if (!$user) {
+        // Redirigez vers la page de connexion, par exemple
+        return $this->redirectToRoute('app_login');
+    }
+
+   
+      // Affichez la page de profil avec les informations de l'utilisateur
+      return $this->render('user/profile.html.twig', [
+        'user' => $user,
+    ]);
+}
+
 }

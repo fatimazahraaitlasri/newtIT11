@@ -1,0 +1,12 @@
+{# templates/navbar.html.twig #}
+<nav class="bg-gray-800 p-4">
+    <div class="container mx-auto flex justify-between items-center">
+        <a class="text-white text-lg font-bold" href="{{ path('app_post_index') }}">NewsIt</a>
+        
+        {% if app.user %}
+            <div class="text-white">
+                <a href="{{ path('app_user_profile') }}" class="hover:underline">{{ app.user.email }}</a>
+            </div>
+        {% endif %}
+    </div>
+</nav>

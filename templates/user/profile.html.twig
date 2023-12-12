@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Profile{% endblock %}
+
+{% block body %}
+    <h1 class="text-3xl font-bold mb-4">Welcome to your profile, {{ user.email }}!</h1>
+
+    <dl class="space-y-2">
+        <div class="flex">
+            <dt class="w-24 font-semibold">Email:</dt>
+            <dd>{{ user.email }}</dd>
+        </div>
+
+        <div class="flex">
+            <dt class="w-24 font-semibold">Roles:</dt>
+            <dd>{{ user.roles|join(', ') }}</dd>
+        </div>
+
+        {# Ajoutez d'autres informations de l'utilisateur selon vos besoins #}
+    </dl>
+
+    {# Ajoutez ici d'autres éléments HTML, des liens, etc. #}
+{% endblock %}

@@ -8,7 +8,18 @@
 {% endblock %}
 
 {% block body %}
+{% include 'nav.html.twig' %}
     <h1 class="text-3xl  font-bold underline mb-6">Posts</h1>
+<form method="get" class="my-4">
+    <label for="category" class="mr-2 font-semibold">Category:</label>
+    <select id="category" name="category" class="p-2 border rounded">
+        <option value="" class="text-gray-600">Toutes les catégories</option>
+        {% for category in categories %}
+            <option value="{{ category.id }}" class="text-gray-800">{{ category.name }}</option>
+        {% endfor %}
+    </select>
+    <button type="submit" class="ml-2 p-2 bg-blue-500 text-white rounded hover:bg-blue-700 transition duration-300">Filtrer</button>
+</form>
 
     {% for post in posts %}
         <div class="mb-6 p-4 border rounded shadow-lg text-center">

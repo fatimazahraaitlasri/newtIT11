@@ -4,27 +4,34 @@
 
 {% block body %}
     <div class="mb-6 p-4 border rounded shadow-lg text-center">
-        <h1 class="text-3xl font-bold mb-4">Post</h1>
+        <h1 class="text-3xl font-bold mb-4 ">Post</h1>
 
-       
-        <div class="mb-4">
-            <span class="font-semibold">Title:</span>
-            <span>{{ post.title }}</span>
-        </div>
-        <div class="mb-4">
-            <span class="font-semibold">Content:</span>
-            <span>{{ post.content }}</span>
-        </div>
+      <div class="mb-4 flex flex-col justify-start ">
+    <span class="text-xl font-bold mb-4 ">Title:</span>
+    <span class="ml-2 ">{{ post.title }}</span>
+</div>
+<div class="mb-4">
+    <span class="text-xl font-bold mb-4 ">Content:</span>
+    <p class="ml-2 text-gray-800  w-full p-2 border border-gray-300 rounded-md">{{ post.content }}</p>
+</div>
 
-        <a href="{{ path('app_comment_new', {'postId': post.id}) }}" class="text-blue-500 hover:underline">Add comment</a>
-        
+
+        {# Afficher le formulaire d'ajout de commentaire #}
+        {{ form_start(form) }}
+        <div class="mb-4">
+            {{ form_widget(form.content, {'attr': {'class': 'form-input w-full p-2 border border-gray-300 rounded-md', 'placeholder': 'Add a comment...'}}) }}
+        </div>
+        <button type="submit" class="btn bg-black text-white px-4 py-2 rounded-md hover:bg-[##64748b]"> Add comment </button>
+        {{ form_end(form) }}
+
+        {# Afficher les commentaires existants #}
+        {% for comment in comments %}
+            <div class="mt-6 bg-gray-100 p-4 rounded-md">
+                <p class="font-semibold text-black ">{{ comment.user.email }} a dit :</p>
+                <p class="ml-2">{{ comment.content }}</p>
+            </div>
+        {% endfor %}
+
         <a href="{{ path('app_post_index') }}" class="block mt-4 text-sm text-gray-600 hover:underline">Back to list</a>
     </div>
-
-    {% for comment in comments  %}
-        <div class="mt-6">
-            <p class="font-semibold">{{ comment.user.email }} a dit :</p>
-            <p>{{ comment.content }}</p>
-        </div>
-    {% endfor %}
 {% endblock %}
