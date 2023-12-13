@@ -3,6 +3,7 @@
 namespace App\Controller;
 use Symfony\Component\Security\Core\User\UserInterface;
 use App\Entity\User;
+
 use App\Form\UserType;
 use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping\Id;
@@ -36,6 +37,7 @@ class UserController extends AbstractController
     {
         $user = new User();
         $form = $this->createForm(UserType::class, $user);
+        
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -58,8 +60,10 @@ class UserController extends AbstractController
      */
     public function show(User $user): Response
     {
+        $posts = $user->getPosts();
         return $this->render('user/show.html.twig', [
             'user' => $user,
+            'posts' => $posts,
         ]);
     }
 
@@ -102,7 +106,6 @@ class UserController extends AbstractController
 
 /**
  * @Route("/profile", name="app_user_profile", methods={"GET"})
- * @ParamConverter("user", class="App\Entity\User")
  */
 public function profile(): Response
 {
@@ -112,12 +115,12 @@ public function profile(): Response
 
     // Vérifiez si un utilisateur est connecté
     if (!$user) {
-        // Redirigez vers la page de connexion, par exemple
+    // Redirigez vers la page de connexion, par exemple
         return $this->redirectToRoute('app_login');
     }
 
    
-      // Affichez la page de profil avec les informations de l'utilisateur
+    // Affichez la page de profil avec les informations de l'utilisateur
       return $this->render('user/profile.html.twig', [
         'user' => $user,
     ]);

@@ -106,7 +106,6 @@ class Post
     public function setCategory(?Category $category): self
     {
         $this->category = $category;
-
         return $this;
     }
 
@@ -151,5 +150,12 @@ class Post
     {
         return $this->comment;
     }
+
+
+  
+
+  
+
+ 
    
 }
