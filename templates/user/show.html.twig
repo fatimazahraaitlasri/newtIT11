@@ -35,6 +35,11 @@
 
         <div class="mt-6">
             <h1 class="text-3xl font-bold mb-6">User Posts</h1>
+             
+
+    <div class="max-w-screen-md mx-auto bg-white p-6 rounded shadow">
+        <a href="{{ path('app_post_new') }}" class="bg-black text-white px-4 py-2 rounded">Add new Post</a>
+    </div>
 
             <div class="w-full  bg-white p-6 rounded shadow">
                 <h2 class="text-xl font-bold mb-4 ">Posts by   :  {{ user.email }}</h2>
@@ -42,6 +47,12 @@
                 <div class="flex flex-col gap-3  justify-center items-center  ">
                     {% for post in posts %}
                     <div class="bg-black p-10 text-center">
+                     <a href="{{ path('app_post_edit',{'id': post.id}) }}" class="">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="16" width="16" viewBox="0 0 512 512"><path fill="#f5f7fa" d="M362.7 19.3L314.3 67.7 444.3 197.7l48.4-48.4c25-25 25-65.5 0-90.5L453.3 19.3c-25-25-65.5-25-90.5 0zm-71 71L58.6 323.5c-10.4 10.4-18 23.3-22.2 37.4L1 481.2C-1.5 489.7 .8 498.8 7 505s15.3 8.5 23.7 6.1l120.3-35.4c14.1-4.2 27-11.8 37.4-22.2L421.7 220.3 291.7 90.3z"/></svg>
+                    </a>
+                    <div>{{ include('post/_delete_form.html.twig') }}</div>
+                   
+                   
                         <h1 class="text-xl text-white font-bold mb-6">{{ post.title }}</h1>
                         <div class="text-white">{{ post.content }}</div>
                     </div>
